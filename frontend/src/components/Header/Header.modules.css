@@ -21,3 +21,23 @@ header {
     color:black;
     margin: 5px;
 }
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdownButton {
+    background-color: white;
+    border: 0;
+    color:black
+}
+
+.dropdownButton:hover {
+    background-color: white;
+    color:black;
+}
+
+.dropdown:target {
+    background-color: white;
+    color:black;
+}

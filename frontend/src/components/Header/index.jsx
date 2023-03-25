@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import api from '../../services/apiService';
 import UserContext from '../Context/UserContext';
 import "./Header.modules.css";
+import Button from "../Button/index.jsx";
 
 function Header() {
 
@@ -33,7 +34,23 @@ function Header() {
           (
             <>
               <Link to="/create" className='navLink'>Create new post</Link>
-              <Link to="/logout" className="navLink">Logout</Link>
+            
+              
+              <div class="dropdown">
+                <button 
+                class="btn dropdownButton" 
+                type="button" 
+                data-bs-toggle="dropdown" 
+                aria-expanded="false"
+                >
+                  Options
+                </button>
+                <ul class="dropdown-menu">
+                  <li><Link className="dropdown-item navLink" to="/changePassword">Change Password</Link></li>
+                  <li><Link className="dropdown-item navLink" to="/logout">Logout</Link></li>
+                </ul>
+              </div>
+              
             </>
           )}
           {

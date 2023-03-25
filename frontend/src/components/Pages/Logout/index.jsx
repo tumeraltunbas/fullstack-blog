@@ -12,7 +12,7 @@ function Logout() {
             const {data} = await api.get("/auth/logout");
 
             if(data.success === true){
-                navigate("/", {replace:true});
+                navigate("/login", {replace:true});
             }
             else{
                 navigate("/");

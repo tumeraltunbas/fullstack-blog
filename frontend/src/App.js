@@ -6,6 +6,7 @@ import RegisterPage from './components/Pages/Register';
 import { UserProvider } from './components/Context/UserContext';
 import LoginPage from './components/Pages/Login';
 import Logout from './components/Pages/Logout';
+import ChangePasswordPage from './components/Pages/ChangePassword';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/register" element={<RegisterPage />}/>
                 <Route path="/login" element={<LoginPage />}/>
                 <Route path="/logout" element={<Logout />}/>
+                <Route path="/changePassword" element={<ChangePasswordPage />}/>
               </Route>
           </Routes>
         </UserProvider>
