@@ -112,9 +112,9 @@ export const changePassword = async(req, res, next) => {
 
 export const forgotPassword = async(req, res, next) => {
     try{
-
-        const {email} = req.params;
-        const [DOMAIN, SMTP_USER, RESET_PASSWORD_TOKEN_EXPIRES] = process.env;
+    
+        const {email} = req.body;
+        const {DOMAIN, SMTP_USER, RESET_PASSWORD_TOKEN_EXPIRES} = process.env;
 
         const user = await User.findOne({
             email:email
