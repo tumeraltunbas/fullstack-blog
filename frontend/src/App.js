@@ -7,6 +7,7 @@ import { UserProvider } from './components/Context/UserContext';
 import LoginPage from './components/Pages/Login';
 import Logout from './components/Pages/Logout';
 import ChangePasswordPage from './components/Pages/ChangePassword';
+import ForgotPasswordPage from './components/Pages/ForgotPassword';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />}/>
                 <Route path="/logout" element={<Logout />}/>
                 <Route path="/changePassword" element={<ChangePasswordPage />}/>
+                <Route path="/forgotPassword" element={<ForgotPasswordPage />}/>
               </Route>
           </Routes>
         </UserProvider>
