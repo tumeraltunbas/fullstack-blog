@@ -1,0 +1,44 @@
+.registerForm {
+    text-align: center;
+}
+
+.formTitle {
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+.formInput {
+    display: block;
+    margin: auto;
+    margin-bottom: 2vh;
+    border: none;
+    border-bottom: 2px solid black;
+    width: 20%;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.formInput:focus {
+    outline: none;
+}
+
+.registerBtn{
+    width: 20%;
+    background-color: white;
+    color:black;
+    margin-bottom: 5vh;
+    padding: 5px;
+    cursor: pointer;
+    transition: .5s;
+    border-radius: 5px;
+}
+
+.registerBtn:hover {
+    background-color: black;
+    color: white;
+}
+
+.error {
+    margin-bottom: 5vh;
+    list-style-type: none;
+}

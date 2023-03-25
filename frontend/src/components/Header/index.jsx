@@ -5,10 +5,10 @@ import "./Header.modules.css";
 function Header() {
   return (
     <header>
-        <a href="" className='logo'>MyBlog</a>
+        <a href="/" className='logo'>MyBlog</a>
         <nav>
-            <a href="/" className='navLink'>Register</a> 
-            <a href="/" className='navLink'>Login</a> 
+            <a href="/register" className='navLink'>Register</a> 
+            <a href="/login" className='navLink'>Login</a> 
         </nav>
     </header>
    )
