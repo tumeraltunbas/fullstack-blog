@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {Link} from "react-router-dom";
 import api from '../../services/apiService';
 import UserContext from '../Context/UserContext';
@@ -33,7 +33,7 @@ function Header() {
           (
             <>
               <Link to="/create" className='navLink'>Create new post</Link>
-              <Link className="navLink">Logout</Link>
+              <Link to="/logout" className="navLink">Logout</Link>
             </>
           )}
           {
