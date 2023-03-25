@@ -10,7 +10,7 @@ dotenv.config({path: "./config/config.env"});
 const app = express();
 
 databaseConnection();
-app.use(cors());
+app.use(cors({credentials:true, origin:true}));
 app.use(express.static("/public"));
 app.use(cookieParser());
 app.use(express.json());
