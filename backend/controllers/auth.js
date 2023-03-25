@@ -64,3 +64,11 @@ export const getUser = async(req, res, next) => {
     .status(200)
     .json({success:true, user:req.user});
 }
+
+export const logout = async(req, res, next) => {
+    
+    return res
+    .status(200)
+    .cookie("token", undefined, {maxAge:Date.now()})
+    .json({success:true});
+}
