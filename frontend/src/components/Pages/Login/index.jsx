@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from '../../Button'
 import Input from '../../Input'
 import "./Login.modules.css";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import api from "../../../services/apiService.js";
 
 function LoginPage() {
@@ -62,11 +62,25 @@ function LoginPage() {
         onChange={(e) => setPassword(e.target.value)}
         />
 
+        <Link 
+        className="forgotPassword" 
+        style={{
+          display:"block", 
+          marginBottom:"2vh", 
+          color:"black", 
+          fontSize:"15px"
+        }} 
+        to="/forgotPassword"
+        >
+          Did you forgot your password?
+        </Link>
+
         <Button
         type="submit"
         text="Login"
         className="registerBtn"
         />
+
     </form>
     
     </>
