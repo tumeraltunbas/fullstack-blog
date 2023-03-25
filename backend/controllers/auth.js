@@ -2,7 +2,9 @@ import { User } from "../models/User.js";
 import CustomError from "../utils/error/CustomError.js";
 import { checkEmail, checkPassword } from "../utils/helpers/inputHelpers.js";
 import { sendJwtToCookie } from "../utils/helpers/jwtHelpers.js";
-import bcrypt from "bcryptjs";
+import bcrypt, { hash } from "bcryptjs";
+import {generate} from "randomstring";
+import { mailHelper } from "../utils/helpers/mailHelpers.js";
 
 
 export const register = async(req, res, next) => {
@@ -101,6 +103,47 @@ export const changePassword = async(req, res, next) => {
         return res
         .status(200)
         .json({success:true, message:"Your password has been changed"});
+
+    }
+    catch(err){
+        return next(err);
+    }
+}
+
+export const resetPassword = async(req, res, next) => {
+    try{
+        
+        const {email} = req.params;
+        const [DOMAIN, SMTP_USER, RESET_PASSWORD_TOKEN_EXPIRES] = process.env;
+
+        const user = await User.findOne({
+            email:email
+        });
+
+        const string = generate(20);
+
+        const salt = bcrypt.genSaltSync();
+        const hashedString = bcrypt.hashSync(string, salt);
+
+        user.resetPassword.token = hashedString;
+        user.resetPassword.expires = new Date(Date.now() + Number(RESET_PASSWORD_TOKEN_EXPIRES));
+
+        await user.save();
+
+        const resetPasswordLink = `${DOMAIN}/api/auth/resetPassword?${hashedString}`;
+        
+        const mailOptions = {
+            from: SMTP_USER,
+            to: email,
+            subject: "About reset password",
+            html: `<a href='${resetPasswordLink}'>Link</a>`
+        };
+
+        mailHelper(mailOptions);
+
+        return res
+        .status(200)
+        .json({success:true, message: "Reset password link sent"});
 
     }
     catch(err){
