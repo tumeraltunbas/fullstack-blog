@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -29,5 +30,18 @@ const UserSchema = new mongoose.Schema({
         default:true
     },
 });
+
+
+UserSchema.pre("save", function(next){
+    if(this.isModified("pasword")) {
+
+        const salt = bcrypt.genSaltSync();
+        const hash = bcrypt.hashSync(this.password, salt);
+        this.password=hash;
+        
+        next();
+    }
+    next();
+})
 
 export const User = mongoose.model("User", UserSchema);
