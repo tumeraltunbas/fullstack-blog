@@ -2,7 +2,7 @@ import { User } from "../models/User.js";
 import CustomError from "../utils/error/CustomError.js";
 import { checkEmail, checkPassword } from "../utils/helpers/inputHelpers.js";
 import { sendJwtToCookie } from "../utils/helpers/jwtHelpers.js";
-import bcrypt, { hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import {generate} from "randomstring";
 import { mailHelper } from "../utils/helpers/mailHelpers.js";
 
@@ -83,9 +83,9 @@ export const changePassword = async(req, res, next) => {
         const user = await User.findOne({
             _id:req.user.id
         })
-        .select("_id +password");
+        .select("_id password");
 
-        if(bcrypt.compareSync(oldPassword, user.password)){
+        if(!bcrypt.compareSync(oldPassword, user.password)){
             return next(new CustomError(400, "Your old password is not correct"));
         }
 
