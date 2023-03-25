@@ -72,3 +72,38 @@ export const logout = async(req, res, next) => {
     .cookie("token", undefined, {maxAge:Date.now()})
     .json({success:true});
 }
+
+export const changePassword = async(req, res, next) => {
+    try{
+
+        const {oldPassword, newPassword, passwordRepeat} = req.body; 
+
+        const user = await User.findOne({
+            _id:req.user.id
+        })
+        .select("_id +password");
+
+        if(bcrypt.compareSync(oldPassword, user.password)){
+            return next(new CustomError(400, "Your old password is not correct"));
+        }
+
+        if(newPassword != passwordRepeat){
+            return next(new CustomError(400, "Your password does not match"));
+        }
+        
+        if(!checkPassword(newPassword)){
+            return next(new CustomError(400, "Your password must contains: Minimum eight characters, at least one letter and one number."));
+        }
+
+        user.password = newPassword;
+        await user.save();
+
+        return res
+        .status(200)
+        .json({success:true, message:"Your password has been changed"});
+
+    }
+    catch(err){
+        return next(err);
+    }
+}
