@@ -14,13 +14,9 @@ function Header() {
 
       const {data} = await api.get("/auth/getUser");
 
-      console.log(data);
-
       if(data.success === true){
-        
         setUser(data.user);
       }
-
     }
 
     getUser();
@@ -32,18 +28,19 @@ function Header() {
         <a href="/" className='logo'>MyBlog</a>
         <nav>
 
-          {user &&
+          {
+          user &&
           (
             <>
               <Link to="/create" className='navLink'>Create new post</Link>
-              <Link className="navLink">Hello, {user.username}</Link>
+              <Link className="navLink">Logout</Link>
             </>
           )}
           {
             !user && (
               <>
-                <a href="/register" className='navLink'>Register</a> 
-                <a href="/login" className='navLink'>Login</a> 
+                <Link to="/register" className='navLink'>Register</Link> 
+                <Link to="/login" className='navLink'>Login</Link> 
               </>
             )
           }
