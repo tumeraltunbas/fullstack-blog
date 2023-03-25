@@ -49,7 +49,7 @@ UserSchema.methods.createJwt = function(){
 
 
 UserSchema.pre("save", function(next){
-    if(this.isModified("pasword")) {
+    if(this.isModified("password")) {
 
         const salt = bcrypt.genSaltSync();
         const hash = bcrypt.hashSync(this.password, salt);
