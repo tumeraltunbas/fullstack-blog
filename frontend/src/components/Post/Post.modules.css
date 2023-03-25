@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
+
+.post {
+    display: flex;
+    width: 100%;
+    border: black 2px solid;
+    margin-bottom: 3vh;
+}
+
+.post img {
+    width: 30%;
+}
+
+.postInfo {
+    margin-top: 2vh;
+    width: 70%;
+    padding: 10px;
+}
+
+.author {
+    margin-top: 1vh;
+    color: #5A5A5A;
+    margin-bottom: 2vh;
+    font-weight: bolder;
+}
+

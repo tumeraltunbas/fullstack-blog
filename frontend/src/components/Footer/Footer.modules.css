@@ -1,0 +1,10 @@
+footer {
+    text-align: center;
+    border-top: 2px solid black;
+    margin: auto;
+    width: 60%;
+}
+footer p {
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+}

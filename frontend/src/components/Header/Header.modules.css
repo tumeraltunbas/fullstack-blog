@@ -1,0 +1,23 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: center;
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+}
+
+.logo{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 1.3rem
+}
+
+.navLink {
+    text-decoration: none;
+    color:black;
+    margin: 5px;
+}
