@@ -64,3 +64,38 @@ export const getPostById = async(req, res, next) => {
         return next(err);
     }
 }
+
+export const editPost = async(req, res, next) => {
+    try{
+
+        const post = req.body;
+        const {id} = req.params;
+        
+        let obj = {
+            ...post
+        } 
+
+        if(req.file){
+            const fileName = String(req.user.id + "_" + req.file.originalname);
+            obj = {
+                ...post, fileName
+            }
+        }
+
+        await Post.findOneAndUpdate(
+            {_id:req.user.id},
+            
+            {
+                ...obj    
+            }
+        );
+
+        return res
+        .status(200)
+        .json({success:true, message:"Post has been updated"});
+        
+    }
+    catch(err){
+        return next(err);
+    }
+}
