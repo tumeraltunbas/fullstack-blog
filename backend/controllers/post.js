@@ -53,7 +53,8 @@ export const getPostById = async(req, res, next) => {
         const post = await Post.findOne({
             _id:id,
             isVisible:true
-        });
+        })
+        .populate({path: "user", select:"username"});
 
         return res
         .status(200)
@@ -83,7 +84,7 @@ export const editPost = async(req, res, next) => {
         }
 
         await Post.findOneAndUpdate(
-            {_id:req.user.id},
+            {_id:id},
             
             {
                 ...obj    

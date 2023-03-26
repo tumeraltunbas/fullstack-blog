@@ -6,7 +6,7 @@ const router = Router();
 
 router.post("/create", [getAccessToRoute, upload.single("file")], createPost);
 router.get("/", getPosts);
-router.get("/:id", getAccessToRoute, getPostById);
-router.edit("/:id", [getAccessToRoute, getPostOwnerAccess], editPost);
+router.get("/:id", getPostById);
+router.put("/:id", [getAccessToRoute, getPostOwnerAccess], editPost);
 
 export default router;
