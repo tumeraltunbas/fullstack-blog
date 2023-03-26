@@ -9,19 +9,20 @@ function Index() {
 
   useEffect(() => {
     
-    api.get("/post")
-    // .then(res => {
+    const getPosts = async(e) => {
+      
+      const {data} = await api.get("/post");
+      
+      if(data.success === true){
+        
+        setPosts(data.success);
+      }
+      else{
+        alert("An error occured when we try to pull posts from database");
+      }
+    }
 
-    //   const {posts} = res.data;
-
-    //   if(res.data.success === true){
-    //     setPosts(posts);
-    //   }
-    // })
-    .then(res => res.data)
-    .then(data => data.posts)
-    .then(posts => setPosts(posts))
-    .catch(err => console.log(err));
+    getPosts();
   
   }
   , []) //when a component mounted

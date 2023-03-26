@@ -70,7 +70,7 @@ function LoginPage() {
           color:"black", 
           fontSize:"15px"
         }} 
-        to="/forgotPassword"
+        to="/auth/forgotPassword"
         >
           Did you forgot your password?
         </Link>

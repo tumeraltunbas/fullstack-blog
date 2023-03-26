@@ -114,7 +114,7 @@ export const forgotPassword = async(req, res, next) => {
     try{
     
         const {email} = req.body;
-        const {DOMAIN, SMTP_USER, RESET_PASSWORD_TOKEN_EXPIRES} = process.env;
+        const {PRODUCTION_DOMAIN, SMTP_USER, RESET_PASSWORD_TOKEN_EXPIRES} = process.env;
 
         const user = await User.findOne({
             email:email
@@ -130,7 +130,7 @@ export const forgotPassword = async(req, res, next) => {
 
         await user.save();
 
-        const resetPasswordLink = `${DOMAIN}/api/auth/resetPassword?resetPasswordToken=${hashedString}`;
+        const resetPasswordLink = `${PRODUCTION_DOMAIN}/auth/resetPassword?resetPasswordToken=${hashedString}`;
         
         const mailOptions = {
             from: SMTP_USER,
@@ -177,6 +177,8 @@ export const resetPassword = async(req, res, next) => {
        }
 
        user.password = password;
+       user.resetPassword.token = null;
+       user.resetPassword.expires = null;
        await user.save();
 
        return res

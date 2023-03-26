@@ -31,7 +31,7 @@ function ChangePasswordPage() {
         });
 
         if(data.success === true){
-            navigate("/logout");
+            navigate("/auth/logout");
         }
     }
 

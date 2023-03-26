@@ -33,7 +33,7 @@ function Header() {
           user &&
           (
             <>
-              <Link to="/create" className='navLink'>Create new post</Link>
+              <Link to="/post/create" className='navLink'>Create new post</Link>
             
               
               <div class="dropdown">
@@ -46,8 +46,8 @@ function Header() {
                   Options
                 </button>
                 <ul class="dropdown-menu">
-                  <li><Link className="dropdown-item navLink" to="/changePassword">Change Password</Link></li>
-                  <li><Link className="dropdown-item navLink" to="/logout">Logout</Link></li>
+                  <li><Link className="dropdown-item navLink" to="auth/changePassword">Change Password</Link></li>
+                  <li><Link className="dropdown-item navLink" to="auth/logout">Logout</Link></li>
                 </ul>
               </div>
               
@@ -56,8 +56,8 @@ function Header() {
           {
             !user && (
               <>
-                <Link to="/register" className='navLink'>Register</Link> 
-                <Link to="/login" className='navLink'>Login</Link> 
+                <Link to="/auth/register" className='navLink'>Register</Link> 
+                <Link to="/auth/login" className='navLink'>Login</Link> 
               </>
             )
           }

@@ -19,12 +19,19 @@ function App() {
           <Routes>
               <Route element={<Layout />}>
                 <Route index element={<Index />}/>
-                <Route path="/register" element={<RegisterPage />}/>
-                <Route path="/login" element={<LoginPage />}/>
-                <Route path="/logout" element={<Logout />}/>
-                <Route path="/changePassword" element={<ChangePasswordPage />}/>
-                <Route path="/forgotPassword" element={<ForgotPasswordPage />}/>
-                <Route path="/resetPassword" element={<ResetPasswordPage />}/>
+                <Route path="/auth">
+                    <Route path="register" element={<RegisterPage />}/>
+                    <Route path="login" element={<LoginPage />}/>
+                    <Route path="logout" element={<Logout />}/>
+                    <Route path="changePassword" element={<ChangePasswordPage />}/>
+                    <Route path="forgotPassword" element={<ForgotPasswordPage />}/>
+                    <Route path="resetPassword" element={<ResetPasswordPage />}/>
+                </Route>
+
+                <Route path="/post">
+
+                </Route>
+                
                 <Route path="*" element={<NotFoundPage />}/>
               </Route>
           </Routes>
