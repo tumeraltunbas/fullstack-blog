@@ -1,7 +1,6 @@
 import multer from "multer";
 import rootPath from "app-root-path";
 import CustomError from "../error/CustomError.js";
-import { generate } from "randomstring";
 
 const storage = multer.diskStorage({
 
@@ -9,8 +8,8 @@ const storage = multer.diskStorage({
 
     filename: function(req, file, cb)
     {
-        const extension = file.mimetype.split("/")[1];
-        const fileName = String(req.user.id + "_" + generate(5) + "." + extension)
+        console.log(file.originalname);
+        const fileName = String(req.user.id + "_" + file.originalname);
         cb(null, fileName);
     }
 });
