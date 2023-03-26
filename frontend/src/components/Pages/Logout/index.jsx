@@ -9,14 +9,14 @@ function Logout() {
     useEffect(() => {
 
         const logout = async() => {
-            const {data} = await api.get("/auth/logout");
-
-            if(data.success === true){
+            try{
+                
+                await api.get("/auth/logout");
                 navigate("/auth/login", {replace:true});
             }
-            else{
-                navigate("/");
+            catch(error){
                 alert("An error occured when you tried to logout, try again.")
+                navigate("/");
             }
         }
 

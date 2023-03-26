@@ -23,15 +23,20 @@ function ChangePasswordPage() {
             setError("You have to provide all inputs");
             return false;
         }
-
-        const {data} = await api.put("/auth/changePassword", {
+        
+        try{
+          
+          await api.put("/auth/changePassword", {
             oldPassword:oldPassword,
             newPassword:newPassword,
             passwordRepeat:passwordRepeat
-        });
+          });
 
-        if(data.success === true){
-            navigate("/auth/logout");
+          navigate("/auth/logout");
+        }
+        catch(error){
+          const {data} = error.response;
+          setError(data);
         }
     }
 

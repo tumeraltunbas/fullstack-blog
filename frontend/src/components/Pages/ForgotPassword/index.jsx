@@ -17,12 +17,18 @@ function ForgotPasswordPage() {
         
         e.preventDefault();
         
-        const {data} = await api.post("/auth/forgotPassword", {
+        try{
+          
+          await api.post("/auth/forgotPassword", {
             email:email
-        });
-
-        if(data.success === true){
-            navigate("/");
+          });
+          
+          navigate("/");
+        }
+        catch(error){
+          
+          const {data} = error.response;
+          setError(data.message);
         }
     }
 

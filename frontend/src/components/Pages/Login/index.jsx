@@ -4,10 +4,9 @@ import Input from '../../Input'
 import "./Login.modules.css";
 import {Link, useNavigate} from "react-router-dom";
 import api from "../../../services/apiService.js";
+import Error from '../../Error';
 
 function LoginPage() {
-
-    
   
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -19,18 +18,25 @@ function LoginPage() {
     
     e.preventDefault();
 
-    const {data} = await api.post("/auth/login", {
-      email:email,
-      password:password
-    });
-    
-    if(data.success === true){
-      navigate("/");
+    if(!email || !password){
+      setError("You have to provide all inputs");
+      return;
     }
-    else{
+
+    try{
+      
+      await api.post("/auth/login", {
+        email:email,
+        password:password
+      });
+
+      navigate("/")
+
+    }
+    catch(error){
+      const {data} = error.response;
       setError(data.message);
     }
-  
   }
 
   return (
@@ -39,11 +45,19 @@ function LoginPage() {
         <h1 className="formTitle">Login</h1>
 
         
-      {error && (
+      {/* {error && (
         <ul className="error">
           <li className='errorItem'>{error}</li>
         </ul>
-      ) }
+      ) } */}
+
+      {error &&
+      (
+        <Error
+        text={error}
+        style={{transition: "1s"}}
+        />
+      )}
 
 
         <Input

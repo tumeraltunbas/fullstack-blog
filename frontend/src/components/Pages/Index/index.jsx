@@ -6,19 +6,20 @@ import Post from '../../Post/index.jsx';
 function Index() {
 
   const [posts, setPosts] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     
     const getPosts = async(e) => {
       
-      const {data} = await api.get("/post");
-      
-      if(data.success === true){
-        
+      try{
+        const {data} = await api.get("/post");
         setPosts(data.success);
+
       }
-      else{
-        alert("An error occured when we try to pull posts from database");
+      catch(error){
+        const {data} = error.response;
+        setError(data.message);
       }
     }
 
@@ -29,6 +30,11 @@ function Index() {
 
   return (
     <>
+      {error && (
+          <ul className="error">
+            <li className='errorItem'>{error}</li>
+          </ul>
+        )}
       {
         posts.map((p, index) => {
           return <Post 

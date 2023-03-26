@@ -22,23 +22,26 @@ function RegisterPage() {
       return false;
     }
 
-    const {data} = await api.post("/auth/register", {
-      email:email, 
-      username:username, 
-      password:password
-    });
-
-    if(data.success === true){
+    try{
+      
+      await api.post("/auth/register", {
+        email:email, 
+        username:username, 
+        password:password
+      });
+      
       navigate("/");
+
     }
-    else{
+    catch(error){
+      const {data} = error.response;
 
       if(data.message.includes("duplicate")){
-      
+
         setError("This email or username already in use, please choose another one.");
       }
       else{
-       
+        
         setError(data.message);
       }
     }
