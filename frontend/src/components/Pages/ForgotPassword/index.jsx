@@ -1,15 +1,16 @@
 import "./ForgotPassword.modules.css";
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Input from "../../Input";
 import Button from "../../Button";
 import api from "../../../services/apiService";
 import { useNavigate } from "react-router-dom";
+import ErrorContext from "../../Context/ErrorContext";
 
 function ForgotPasswordPage() {
 
     const [email, setEmail] = useState();
-    const [error, setError] = useState();
+    const {error, setError} = useContext(ErrorContext);
 
     const navigate = useNavigate();
 

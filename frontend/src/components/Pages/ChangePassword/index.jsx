@@ -1,18 +1,20 @@
 import "./ChangePassword.modules.css";
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from "react";
 import Input from "../../Input";
 import Button from "../../Button";
 import api from "../../../services/apiService";
 import { useNavigate } from "react-router-dom";
+import ErrorContext from "../../Context/ErrorContext";
+import Error from "../../Error";
 
 function ChangePasswordPage() {
 
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [passwordRepeat, setPasswordRepeat] = useState("");
-    const [error, setError] = useState();
+    const {error, setError} = useContext(ErrorContext);
 
     const navigate = useNavigate();
 
@@ -47,11 +49,12 @@ function ChangePasswordPage() {
       <h1 className="formTitle">Change Password</h1>
 
 
-      {error && (
-        <ul className="error">
-          <li className='errorItem'>{error}</li>
-        </ul>
-      ) }
+      {error &&
+      (
+        <Error
+        text={error}
+        />
+      )}
 
       <Input
       type="password"

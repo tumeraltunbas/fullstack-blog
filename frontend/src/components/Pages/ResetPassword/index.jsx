@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../../../services/apiService';
 import Button from '../../Button';
+import ErrorContext from '../../Context/ErrorContext';
+import Error from '../../Error';
 import Input from '../../Input';
 
 function ResetPasswordPage() {
 
     const [password, setPassword] = useState();
     const [passwordRepeat, setPasswordRepeat] = useState();
-    const [error, setError] = useState("");
+    const {error, setError} = useContext(ErrorContext);
 
     const search = useLocation().search;
     const resetPasswordToken = new URLSearchParams(search).get("resetPasswordToken");
@@ -39,11 +42,12 @@ function ResetPasswordPage() {
     <form className='registerForm' onSubmit={resetPassword}>
     <h1 className="formTitle">Reset Password</h1>
 
-    {error && (
-      <ul className="error">
-        <li className='errorItem'>{error}</li>
-      </ul>
-    ) }
+    {error &&
+      (
+        <Error
+        text={error}
+        />
+      )}
 
     <Input
     type="password"

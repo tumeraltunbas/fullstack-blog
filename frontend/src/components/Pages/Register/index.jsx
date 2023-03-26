@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Input from '../../Input/index.jsx';
 import Button from "../../Button/index.jsx";
 import "./Register.modules.css";
 import {useNavigate} from "react-router-dom";
 import api from "../../../services/apiService.js";
+import Error from '../../Error/index.jsx';
+import ErrorContext from '../../Context/ErrorContext.js';
 
 function RegisterPage() {
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const {error, setError} = useContext(ErrorContext);
 
   const navigate = useNavigate();
 
@@ -52,11 +54,12 @@ function RegisterPage() {
       <h1 className="formTitle">Register</h1>
 
 
-      {error && (
-        <ul className="error">
-          <li className='errorItem'>{error}</li>
-        </ul>
-      ) }
+      {error &&
+      (
+        <Error
+        text={error}
+        />
+      )}
 
       <Input
       type="text"

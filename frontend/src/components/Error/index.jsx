@@ -14,15 +14,16 @@ function Error(props) {
     }, [showError])
 
   return (
-    <div 
-    className="error"
-    style={props.style}
-    >
+    <>
         {showError && (
-            <p>{props.text}</p>
+            <div
+            className='error'
+            style={props.style}
+            >
+                <p>{props.text}</p>
+            </div>
         )}
-    </div>
-
+    </>
     )
 }
 

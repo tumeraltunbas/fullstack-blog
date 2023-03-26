@@ -1,12 +1,14 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import api from '../../../services/apiService.js';
+import ErrorContext from '../../Context/ErrorContext.js';
+import Error from '../../Error/index.jsx';
 import Post from '../../Post/index.jsx';
 
 function Index() {
 
   const [posts, setPosts] = useState([]);
-  const [error, setError] = useState("");
+  const {error, setError} = useContext(ErrorContext);
 
   useEffect(() => {
     
@@ -30,11 +32,13 @@ function Index() {
 
   return (
     <>
-      {error && (
-          <ul className="error">
-            <li className='errorItem'>{error}</li>
-          </ul>
-        )}
+      {error &&
+      (
+        <Error
+        text={error}
+        />
+      )}
+      
       {
         posts.map((p, index) => {
           return <Post 

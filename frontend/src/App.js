@@ -10,32 +10,35 @@ import ChangePasswordPage from './components/Pages/ChangePassword';
 import ForgotPasswordPage from './components/Pages/ForgotPassword';
 import ResetPasswordPage from './components/Pages/ResetPassword';
 import NotFoundPage from './components/Pages/NotFound';
+import { ErrorProvider } from './components/Context/ErrorContext';
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <UserProvider>
-          <Routes>
-              <Route element={<Layout />}>
-                <Route index element={<Index />}/>
-                <Route path="/auth">
-                    <Route path="register" element={<RegisterPage />}/>
-                    <Route path="login" element={<LoginPage />}/>
-                    <Route path="logout" element={<Logout />}/>
-                    <Route path="changePassword" element={<ChangePasswordPage />}/>
-                    <Route path="forgotPassword" element={<ForgotPasswordPage />}/>
-                    <Route path="resetPassword" element={<ResetPasswordPage />}/>
-                </Route>
+        <ErrorProvider>
+          <UserProvider>
+            <Routes>
+                <Route element={<Layout />}>
+                  <Route index element={<Index />}/>
+                  <Route path="/auth">
+                      <Route path="register" element={<RegisterPage />}/>
+                      <Route path="login" element={<LoginPage />}/>
+                      <Route path="logout" element={<Logout />}/>
+                      <Route path="changePassword" element={<ChangePasswordPage />}/>
+                      <Route path="forgotPassword" element={<ForgotPasswordPage />}/>
+                      <Route path="resetPassword" element={<ResetPasswordPage />}/>
+                  </Route>
 
-                <Route path="/post">
+                  <Route path="/post">
 
+                  </Route>
+                  
+                  <Route path="*" element={<NotFoundPage />}/>
                 </Route>
-                
-                <Route path="*" element={<NotFoundPage />}/>
-              </Route>
-          </Routes>
-        </UserProvider>
+            </Routes>
+          </UserProvider>
+        </ErrorProvider>
       </BrowserRouter>
     </>
   );

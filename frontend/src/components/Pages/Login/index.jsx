@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Button from '../../Button'
 import Input from '../../Input'
 import "./Login.modules.css";
 import {Link, useNavigate} from "react-router-dom";
 import api from "../../../services/apiService.js";
 import Error from '../../Error';
+import ErrorContext from '../../Context/ErrorContext';
 
 function LoginPage() {
   
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState("");
+
+  const {error, setError} = useContext(ErrorContext);
 
   const navigate = useNavigate()
 
@@ -44,18 +46,10 @@ function LoginPage() {
     <form action="" onSubmit={login}>
         <h1 className="formTitle">Login</h1>
 
-        
-      {/* {error && (
-        <ul className="error">
-          <li className='errorItem'>{error}</li>
-        </ul>
-      ) } */}
-
       {error &&
       (
         <Error
         text={error}
-        style={{transition: "1s"}}
         />
       )}
 
