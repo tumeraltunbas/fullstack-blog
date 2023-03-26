@@ -12,6 +12,7 @@ import ResetPasswordPage from './components/Pages/ResetPassword';
 import NotFoundPage from './components/Pages/NotFound';
 import { ErrorProvider } from './components/Context/ErrorContext';
 import CreatePostPage from './components/Pages/CreatePost';
+import PostDetailsPage from './components/Pages/PostDetails';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
 
                   <Route path="/post">
                     <Route path="create" element={<CreatePostPage />}/>
+                    <Route path=":id" element={<PostDetailsPage />}/>
                   </Route>
                   
                   <Route path="*" element={<NotFoundPage />}/>
