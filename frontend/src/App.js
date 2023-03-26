@@ -11,6 +11,7 @@ import ForgotPasswordPage from './components/Pages/ForgotPassword';
 import ResetPasswordPage from './components/Pages/ResetPassword';
 import NotFoundPage from './components/Pages/NotFound';
 import { ErrorProvider } from './components/Context/ErrorContext';
+import CreatePostPage from './components/Pages/CreatePost';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
                   </Route>
 
                   <Route path="/post">
-
+                    <Route path="create" element={<CreatePostPage />}/>
                   </Route>
                   
                   <Route path="*" element={<NotFoundPage />}/>

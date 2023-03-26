@@ -1,0 +1,14 @@
+.postInput {
+    width: 70% ;
+    display: block;
+    margin: auto;
+    margin-bottom: 2vh;
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.postInput:focus {
+    outline: none;
+}
