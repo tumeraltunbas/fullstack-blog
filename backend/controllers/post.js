@@ -3,13 +3,14 @@ import { Post } from "../models/Post.js";
 export const createPost = async(req, res, next) => {
     try{
 
-        //to be refactored
-        const {title, summary, image, content} = req.body;
+        const {title, summary, content} = req.body;
         
+        const fileName = String(req.user.id + "_" + req.file.originalname);
+
         await Post.create({
             title:title,
             summary:summary,
-            image:image,
+            image:fileName,
             content:content,
             user:req.user.id
         });
