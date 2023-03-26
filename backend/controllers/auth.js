@@ -130,7 +130,7 @@ export const forgotPassword = async(req, res, next) => {
 
         await user.save();
 
-        const resetPasswordLink = `${DOMAIN}/api/auth/resetPassword?ResetPasswordToken=${hashedString}`;
+        const resetPasswordLink = `${DOMAIN}/api/auth/resetPassword?resetPasswordToken=${hashedString}`;
         
         const mailOptions = {
             from: SMTP_USER,
@@ -153,24 +153,28 @@ export const forgotPassword = async(req, res, next) => {
 
 export const resetPassword = async(req, res, next) => {
     try{
-       const {resetPasswordToken} = req.params;
+       const {resetPasswordToken} = req.query;
 
        const {password, passwordRepeat} = req.body; 
-       
 
         if(password != passwordRepeat) {
             return next(new CustomError(400, "Your password does not match"));
         }
 
-       const user = await User.findOne({
-        "resetPassword.token": resetPasswordToken,
-        "resetPassword.expires" : {$gt : Date.now()}
-       });
+        const user = await User.findOne(
+            {$and : [
+                {"resetPassword.token":resetPasswordToken}, 
+                {"resetPassword.expires": {$gt: Date.now()}}
+            ]}
+        );
 
        if(!user){
          return next(new CustomError(400, "Your reset password token wrong or expired"));
        }
 
+       if(bcrypt.compareSync(password, user.password)){
+            return next(new CustomError(400, "Your new password can not be same with old one"));
+       }
 
        user.password = password;
        await user.save();
