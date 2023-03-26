@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import Input from '../../Input/index.jsx';
 import Button from "../../Button/index.jsx";
 import "./Register.modules.css";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import api from "../../../services/apiService.js";
 import Error from '../../Error/index.jsx';
 import ErrorContext from '../../Context/ErrorContext.js';
@@ -84,6 +84,19 @@ function RegisterPage() {
       value={password}
       onChange={(e) => setPassword(e.target.value)}
       />
+
+      <Link 
+        className="forgotPassword" 
+        style={{
+          display:"block", 
+          marginBottom:"2vh", 
+          color:"black", 
+          fontSize:"15px"
+        }} 
+        to="/auth/login"
+        >
+          Already have an account? Log in here!
+        </Link>
 
       <Button
       type="submit"
