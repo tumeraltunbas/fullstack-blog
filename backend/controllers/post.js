@@ -44,3 +44,23 @@ export const getPosts = async(req, res, next) => {
         return next(err);
     }
 }
+
+export const getPostById = async(req, res, next) => {
+    try{
+
+        const {id} = req.params;
+
+        const post = await Post.findOne({
+            _id:id,
+            isVisible:true
+        });
+
+        return res
+        .status(200)
+        .json({success:true, post:post});
+
+    }
+    catch(err){
+        return next(err);
+    }
+}
