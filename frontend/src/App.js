@@ -13,6 +13,7 @@ import NotFoundPage from './components/Pages/NotFound';
 import { ErrorProvider } from './components/Context/ErrorContext';
 import CreatePostPage from './components/Pages/CreatePost';
 import PostDetailsPage from './components/Pages/PostDetails';
+import EditPostPage from './components/Pages/EditPost';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
                   <Route path="/post">
                     <Route path="create" element={<CreatePostPage />}/>
                     <Route path=":id" element={<PostDetailsPage />}/>
+                    <Route path="edit/:id" element={<EditPostPage />}/>
                   </Route>
                   
                   <Route path="*" element={<NotFoundPage />}/>
