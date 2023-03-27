@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import api from '../../../services/apiService';
 import ErrorContext from '../../Context/ErrorContext';
 import "./PostDetails.modules.css";
+import moment from "moment";
+
 
 function PostDetailsPage(props) {
 
@@ -42,17 +44,15 @@ function PostDetailsPage(props) {
         <div>
             <h1 className="postTitle">{post.title}</h1>
 
-            <p className="postAuthor">{post.user && `@${post.user.username}`} | 09:25 • 22.03.2023</p>
-            
+            <p className="postAuthor">{post.user && `@${post.user.username}`} | {moment(post.createdAt).format("HH:MM")} • {moment(post.createdAt).format("YYYY.MM.D")}</p>            
+
             <h3 className="postSummary">{post.summary}</h3>
 
-            <img className="postImg" src="https://techcrunch.com/wp-content/uploads/2023/03/GettyImages-1135378306.jpg?w=1390&crop=1" alt="" />
-            {/* <img className="postImg" src={`http://localhost:8080/public/${post.image}`} alt="" /> */}
+            <img className="postImg" src={`http://localhost:8080/${post.image}`} alt="" />
 
             <div className="postContent" dangerouslySetInnerHTML={{__html: post.content}}>
 
             </div>
-
 
         </div>
     </>
