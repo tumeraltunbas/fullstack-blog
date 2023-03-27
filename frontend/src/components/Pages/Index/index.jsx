@@ -16,7 +16,7 @@ function Index() {
       
       try{
         const {data} = await api.get("/post");
-        setPosts(data.success);
+        setPosts(data.posts);
 
       }
       catch(error){
