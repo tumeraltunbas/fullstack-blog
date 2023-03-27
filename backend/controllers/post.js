@@ -69,25 +69,17 @@ export const getPostById = async(req, res, next) => {
 export const editPost = async(req, res, next) => {
     try{
 
-        const post = req.body;
+        const {title, summary, content} = req.body;
         const {id} = req.params;
-        
-        let obj = {
-            ...post
-        } 
-
-        if(req.file){
-            const fileName = String(req.user.id + "_" + req.file.originalname);
-            obj = {
-                ...post, fileName
-            }
-        }
 
         await Post.findOneAndUpdate(
             {_id:id},
             
             {
-                ...obj    
+                title:title,
+                summary:summary,
+                content:content,
+                lastEdited: Date.now()
             }
         );
 
