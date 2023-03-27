@@ -5,13 +5,14 @@ import routes from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import {errorHandler} from "./middlewares/error/errorHandler.js";
 import { databaseConnection } from "./utils/database/databaseConnection.js";
+import appRoot from "app-root-path";
 
 dotenv.config({path: "./config/config.env"});
 const app = express();
 
 databaseConnection();
 app.use(cors({credentials:true, origin:true}));
-app.use(express.static("/public"));
+app.use(express.static(appRoot.path + "/public"));
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api", routes);
